@@ -1,6 +1,6 @@
 # Unifix Client
 **This software is fully closed-source and the code is not publicly available.**
-Inspired by [Cloud Client](https://github.com/cloudclientdev/cloudclient) Truly **an universal fix.**
+Inspired by [Cloud Client](https://github.com/cloudclientdev/cloudclient) . Truly **an universal fix.**
 ## ✔️ Features
 
 - Lightweight FPS optimizations
