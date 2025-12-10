@@ -1,5 +1,6 @@
 # Unifix Client
 ![Version](https://img.shields.io/badge/Version-1.0.0-blue?style=for-the-badge)
+
 **This software is fully closed-source and the code is not publicly available.**
 Inspired by [Cloud Client](https://github.com/cloudclientdev/cloudclient) . Truly **an universal fix.**
 ## ✔️ Features
