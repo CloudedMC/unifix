@@ -24,11 +24,11 @@ You may NOT:
 - Upload the binary publicly
 
 ## 😎 Facts
-**Unifex Client is not a clone of Cloud Client**
+**Unifix Client is not a clone of Cloud Client**
 Rather, It is a Refined Version of It. We are aiming to innovate and Develop Cloud Client further to Compete with Other clients. Cloud Client was discontinued and some Minecraft Players including us loved the client. We will Bring this Client back from the grave and improve the following things-
 - Stability
 - Performance
-- better mods
+- Better mods
 
 ## ✅ Download Steps
 First download the jar. Then go to your prefered launcher. And select "forge 1.8.9" or "forge optifine 1.8.9"
