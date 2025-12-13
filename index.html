@@ -5,39 +5,38 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Unifix Client</title>
-<meta name="description" content="Unifix Client — A modern Minecraft 1.8.9 PvP client focused on performance, stability, and clean design.">
+<meta name="description" content="Unifix Client — A closed-source Minecraft 1.8.9 PvP client focused on performance and stability.">
 <meta name="theme-color" content="#50f0ff">
-<!-- Favicons -->
+
+ <!-- Favicons -->
 <link rel="apple-touch-icon" sizes="180x180" href="https://cloudedmc.github.io/unifix/assets/apple-touch-icon.png"> 
 <link rel="icon" type="image/png" sizes="32x32" href="https://cloudedmc.github.io/unifix/assets/favicon-32x32.png"> 
 <link rel="icon" type="image/png" sizes="16x16" href="https://cloudedmc.github.io/unifix/assets/favicon-16x16.png">
 <link rel="manifest" href="https://cloudedmc.github.io/unifix/assets/site.webmanifest">
 
 <!-- Font Awesome -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
   
-<!-- OpenGraph / Discord -->
-<meta property="og:type" content="website">
+<!-- OpenGraph -->
 <meta property="og:title" content="Unifix Client">
-<meta property="og:description" content="A universal fix for Minecraft 1.8.9 PvP. Performance, stability, modern UI.">
-<meta property="og:image" content="https://cloudedmc.github.io/unifix/assets/android-chrome-192x192.png">
-<meta property="og:url" content="https://cloudedmc.github.io/unifix/">
+<meta property="og:description" content="A closed-source PvP client for Minecraft 1.8.9. Performance. Stability. Clean UI.">
+<meta property="og:image" content="assets/android-chrome-192x192.png">
+<meta property="og:type" content="website">
 
 <link href="https://fonts.cdnfonts.com/css/sf-pro-display" rel="stylesheet">
 
 <style>
 :root {
   --bg:#050508;
-  --bg-soft:#0e1020;
+  --bg-soft:#0d0f1f;
   --accent:#50f0ff;
   --accent-glow:rgba(80,240,255,.35);
   --text:#eaeaea;
-  --muted:#b0b0b0;
+  --muted:#a0a0a0;
   --radius:22px;
 }
 
-/* RESET */
-*{margin:0;padding:0;box-sizing:border-box;font-family:'SF Pro Display',sans-serif;}
+*{margin:0;padding:0;box-sizing:border-box;font-family:'SF Pro Display',sans-serif}
 body{
   background:radial-gradient(circle at top,#12142a,var(--bg));
   color:var(--text);
@@ -46,8 +45,9 @@ body{
 a{text-decoration:none;color:inherit}
 
 /* LOADER */
-.loader-wrapper{
-  position:fixed;inset:0;
+#loader{
+  position:fixed;
+  inset:0;
   background:#050508;
   display:flex;
   align-items:center;
@@ -55,17 +55,14 @@ a{text-decoration:none;color:inherit}
   z-index:9999;
   transition:.6s ease;
 }
-.loader-wrapper.fade-out{
-  opacity:0;
-  pointer-events:none;
-}
-.loader img{
+#loader.hide{opacity:0;pointer-events:none}
+#loader img{
   width:80px;
   animation:pulse 1.6s infinite;
 }
 @keyframes pulse{
   0%{transform:scale(1)}
-  50%{transform:scale(1.12)}
+  50%{transform:scale(1.15)}
   100%{transform:scale(1)}
 }
 
@@ -79,22 +76,19 @@ header{
   justify-content:space-between;
   align-items:center;
   background:rgba(5,5,10,.75);
-  backdrop-filter:blur(10px);
+  backdrop-filter:blur(12px);
   z-index:1000;
 }
 header h1{
   color:var(--accent);
   font-size:1.6rem;
 }
-.nav-links{
-  display:flex;
-  gap:26px;
-}
-.nav-links a{
+nav a{
+  margin-left:28px;
   color:var(--muted);
-  transition:.3s;
+  transition:.25s;
 }
-.nav-links a:hover{color:var(--accent);}
+nav a:hover{color:var(--accent)}
 
 /* HERO */
 .hero{
@@ -107,23 +101,24 @@ header h1{
   padding:0 20px;
 }
 .hero h2{
-  font-size:clamp(2.8rem,5vw,4rem);
+  font-size:clamp(3rem,5vw,4.2rem);
   color:var(--accent);
 }
 .hero p{
-  max-width:700px;
   margin-top:18px;
+  max-width:720px;
   color:var(--muted);
   line-height:1.6;
 }
-.buttons{
-  margin-top:40px;
+.hero .buttons{
+  margin-top:42px;
   display:flex;
   gap:20px;
   flex-wrap:wrap;
+  justify-content:center;
 }
 .btn{
-  padding:15px 38px;
+  padding:15px 40px;
   border-radius:40px;
   font-weight:600;
   background:var(--accent);
@@ -142,9 +137,7 @@ header h1{
 }
 
 /* SECTIONS */
-section{
-  padding:120px 8%;
-}
+section{padding:120px 8%}
 
 /* FEATURES */
 .features{
@@ -161,20 +154,17 @@ section{
   transform:translateY(30px);
   transition:.6s ease;
 }
-.card.visible{
-  opacity:1;
-  transform:none;
-}
-.card h3{color:var(--accent);margin-bottom:12px;}
-.card p{color:var(--muted);line-height:1.6;}
+.card.show{opacity:1;transform:none}
+.card h3{color:var(--accent);margin-bottom:10px}
+.card p{color:var(--muted);line-height:1.6}
 
 /* GALLERY */
-.gallery-grid{
+.gallery{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
   gap:26px;
 }
-.grid-item{
+.gallery-item{
   position:relative;
   overflow:hidden;
   border-radius:var(--radius);
@@ -182,55 +172,48 @@ section{
   transform:translateY(40px);
   transition:.6s ease;
 }
-.grid-item.visible{
-  opacity:1;
-  transform:none;
-}
-.grid-item img{
+.gallery-item.show{opacity:1;transform:none}
+.gallery-item img{
   width:100%;
-  display:block;
   transition:.4s;
 }
-.grid-item:hover img{
-  transform:scale(1.08);
-}
-.grid-overlay{
+.gallery-item:hover img{transform:scale(1.08)}
+.gallery-overlay{
   position:absolute;
   inset:0;
   background:rgba(0,0,0,.55);
   display:flex;
-  flex-direction:column;
   align-items:center;
   justify-content:center;
   opacity:0;
   transition:.4s;
 }
-.grid-item:hover .grid-overlay{opacity:1;}
-.grid-overlay h3{color:var(--accent);}
+.gallery-item:hover .gallery-overlay{opacity:1}
+.gallery-overlay span{color:var(--accent);font-weight:600}
 
 /* FAQ */
 .faq-item{
   background:#0d0f1f;
   border-radius:var(--radius);
-  margin-bottom:14px;
+  margin-bottom:16px;
   overflow:hidden;
 }
-.faq-question{
+.faq-q{
   width:100%;
+  padding:22px;
   background:none;
   border:none;
-  padding:22px;
   color:var(--text);
   font-size:1rem;
   cursor:pointer;
   text-align:left;
 }
-.faq-answer{
+.faq-a{
   padding:0 22px 22px;
   color:var(--muted);
   display:none;
 }
-.faq-item.active .faq-answer{display:block;}
+.faq-item.active .faq-a{display:block}
 
 /* CTA */
 .cta{
@@ -251,80 +234,69 @@ footer{
 
 <body>
 
-<div class="loader-wrapper">
-  <div class="loader">
-    <img src="https://cloudedmc.github.io/unifix/assets/android-chrome-192x192.png">
-  </div>
+<div id="loader">
+  <img src="assets/android-chrome-192x192.png">
 </div>
 
 <header>
   <h1>Unifix</h1>
-  <nav class="nav-links">
-    <a href="#features" target="_blank" rel="noopener">Features</a>
-    <a href="#gallery" target="_blank" rel="noopener">Gallery</a>
-    <a href="#faq" target="_blank" rel="noopener">FAQ</a>
-    <a href="https://discord.gg/QFwuEbESYe" target="_blank" rel="noopener">Discord</a>
+  <nav>
+    <a href="#features" target="_blank">Features</a>
+    <a href="#gallery" target="_blank">Gallery</a>
+    <a href="#faq" target="_blank">FAQ</a>
+    <a href="https://discord.gg/QFwuEbESYe" target="_blank">Discord</a>
   </nav>
 </header>
 
 <section class="hero">
   <h2>Unifix Client</h2>
-  <p>A modern Minecraft 1.8.9 PvP client focused on performance, stability, and clean UI.</p>
+  <p>
+    A closed-source Minecraft 1.8.9 PvP client focused on performance,
+    stability, and a modern user experience.
+  </p>
   <div class="buttons">
-    <a class="btn" href="#" target="_blank" rel="noopener">Download</a>
-    <a class="btn secondary" href="https://github.com/CloudedMC/unifix" target="_blank" rel="noopener">GitHub</a>
+    <a class="btn" href="#" target="_blank">Download</a>
+    <a class="btn secondary" href="https://discord.gg/QFwuEbESYe" target="_blank">Discord</a>
   </div>
 </section>
 
 <section id="features">
   <h2 style="color:var(--accent);margin-bottom:40px">Why Unifix?</h2>
   <div class="features">
-    <div class="card"><h3>Performance First</h3><p>Optimized for FPS stability and low latency.</p></div>
-    <div class="card"><h3>Modern Design</h3><p>Clean UI inspired by modern PvP clients.</p></div>
-    <div class="card"><h3>Open Source</h3><p>Community driven and transparent.</p></div>
+    <div class="card"><h3>Performance Focused</h3><p>Optimized for smooth FPS and low latency.</p></div>
+    <div class="card"><h3>Closed Source</h3><p>Proprietary client — protected codebase.</p></div>
+    <div class="card"><h3>Modern UI</h3><p>Clean visuals inspired by modern PvP clients.</p></div>
   </div>
 </section>
 
 <section id="gallery">
   <h2 style="color:var(--accent);margin-bottom:40px">In-Game Preview</h2>
-  <div class="gallery-grid">
-    <div class="grid-item">
-      <img src="assets/screenshot1.png">
-      <div class="grid-overlay"><h3>Modern UI</h3></div>
-    </div>
-    <div class="grid-item">
-      <img src="assets/screenshot2.png">
-      <div class="grid-overlay"><h3>Custom Mods</h3></div>
-    </div>
-    <div class="grid-item">
-      <img src="assets/screenshot3.png">
-      <div class="grid-overlay"><h3>Performance</h3></div>
-    </div>
+  <div class="gallery">
+    <div class="gallery-item"><img src="assets/screenshot1.png"><div class="gallery-overlay"><span>HUD</span></div></div>
+    <div class="gallery-item"><img src="assets/screenshot2.png"><div class="gallery-overlay"><span>Mods</span></div></div>
+    <div class="gallery-item"><img src="assets/screenshot3.png"><div class="gallery-overlay"><span>Performance</span></div></div>
   </div>
 </section>
 
 <section id="faq">
   <h2 style="color:var(--accent);margin-bottom:40px">FAQ</h2>
-
   <div class="faq-item">
-    <button class="faq-question">Is Unifix safe?</button>
-    <div class="faq-answer">Yes. Unifix is fully open-source.</div>
+    <button class="faq-q">Is Unifix open source?</button>
+    <div class="faq-a">No. Unifix is a closed-source client.</div>
   </div>
-
   <div class="faq-item">
-    <button class="faq-question">Will I get banned?</button>
-    <div class="faq-answer">No unfair advantages are included.</div>
+    <button class="faq-q">Is it safe?</button>
+    <div class="faq-a">Yes. Unifix does not include malicious code.</div>
   </div>
-
   <div class="faq-item">
-    <button class="faq-question">Supported versions?</button>
-    <div class="faq-answer">Minecraft 1.8.9 only.</div>
+    <button class="faq-q">Supported version?</button>
+    <div class="faq-a">Minecraft 1.8.9 only.</div>
   </div>
 </section>
 
 <section class="cta">
-  <h2 style="color:var(--accent);margin-bottom:20px">Ready to use Unifix?</h2>
-  <a class="btn" href="https://discord.gg/QFwuEbESYe" target="_blank" rel="noopener">Join our Discord</a>
+  <h2 style="color:var(--accent);margin-bottom:20px">Ready to try Unifix?</h2>
+  <a class="btn" href="https://discord.gg/QFwuEbESYe" target="_blank">Join our Discord</a>
 </section>
 
 <footer>
@@ -332,29 +304,23 @@ footer{
 </footer>
 
 <script>
-/* Loader */
-window.addEventListener('load',()=>{
-  document.querySelector('.loader-wrapper').classList.add('fade-out');
-});
+window.onload=()=>document.getElementById('loader').classList.add('hide');
 
-/* Reveal animations */
-const observer=new IntersectionObserver(entries=>{
+const obs=new IntersectionObserver(entries=>{
   entries.forEach((e,i)=>{
     if(e.isIntersecting){
-      setTimeout(()=>e.target.classList.add('visible'),i*120);
-      observer.unobserve(e.target);
+      setTimeout(()=>e.target.classList.add('show'),i*120);
+      obs.unobserve(e.target);
     }
-  })
+  });
 },{threshold:.15});
 
-document.querySelectorAll('.card,.grid-item').forEach(el=>observer.observe(el));
+document.querySelectorAll('.card,.gallery-item').forEach(el=>obs.observe(el));
 
-/* FAQ */
-document.querySelectorAll('.faq-question').forEach(btn=>{
-  btn.onclick=()=>btn.parentElement.classList.toggle('active');
+document.querySelectorAll('.faq-q').forEach(q=>{
+  q.onclick=()=>q.parentElement.classList.toggle('active');
 });
 </script>
 
 </body>
 </html>
-
